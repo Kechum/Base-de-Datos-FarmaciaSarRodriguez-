@@ -23,14 +23,14 @@
 --  Constraint PK_Empleado PRIMARY KEY (ID_Empleado)
 --);
 
---create TABLE Productos(
---ID_Productos int not null,
---Nombre Varchar (50),
---Descripcion Varchar (300),
---Precio decimal (10, 2),
---Stock int,
---CONSTRAINT PK_Productos PRIMARY KEY (ID_Productos)
---);
+create TABLE Productos(
+ID_Productos int not null,
+Nombre Varchar (50),
+Descripcion Varchar (300),
+Precio decimal (10, 2),
+Stock int,
+CONSTRAINT PK_Productos PRIMARY KEY (ID_Productos)
+);
 
 --Create Table Proveedores
 --(
@@ -72,3 +72,13 @@ ID_Categoria INT not null,
 Nombre VARCHAR (50),
    CONSTRAINT PK_Categoria PRIMARY KEY (ID_Categoria)
 );
+
+Create Table Productos_Categoria
+(
+  ID_Producto int,
+  ID_Categorias int,
+
+  Constraint FK_Productos_Categorias foreign key (ID_Producto) References Productos (ID_Productos),
+  Constraint FK_Categorias_Productos foreign key (ID_Categorias) References Categoria_Productos (ID_Categoria)
+
+)
