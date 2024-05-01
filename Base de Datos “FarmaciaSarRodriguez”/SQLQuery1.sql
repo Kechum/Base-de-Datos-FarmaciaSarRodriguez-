@@ -22,3 +22,12 @@ Create Table Empleados
 
   Constraint PK_Empleado PRIMARY KEY (ID_Empleado)
 );
+
+create TABLE Productos(
+ID_Productos int not null,
+Nombre Varchar (50),
+Descripción Varchar (300),
+Precio decimal (10, 2),
+Stock int,
+CONSTRAINT PK_Productos PRIMARY KEY (ID_Productos)
+)
