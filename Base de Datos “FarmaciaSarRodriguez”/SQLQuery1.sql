@@ -41,3 +41,14 @@ Create Table Proveedores
 
   Constraint PK_Proveedor PRIMARY KEY (ID_Proveedor)
 );
+
+create TABLE Ventas(
+ID_Venta INT not null,
+ID_Cliente INT,
+ID_Empleado INT,
+Fecha DATE,
+Total DECIMAL (10,2),
+CONSTRAINT PK_Venta PRIMARY KEY (ID_Venta),
+CONSTRAINT FK_Cliente FOREIGN KEY (ID_Cliente) REFERENCES Clientes (ID_Cliente),
+CONSTRAINT FK_Empleado FOREIGN KEY (ID_Empleado) REFERENCES Empleados (ID_Empleado)
+);
