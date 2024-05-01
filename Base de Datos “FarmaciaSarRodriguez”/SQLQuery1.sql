@@ -1,27 +1,27 @@
---Create DataBase FarmaciaSarRodriguez
+Create DataBase FarmaciaSarRodriguez
 
---use FarmaciaSarRodriguez
---Go
+use FarmaciaSarRodriguez
+Go
 
---create TABLE clientes (
---ID_Cliente int not null,
---Nombre Varchar (50),
---Apellido Varchar (50),
---Direccion Varchar (100),
---Telefono Varchar (50),
---CONSTRAINT PK_Clientes PRIMARY KEY  (ID_Cliente)
---);
+create TABLE clientes (
+ID_Cliente int not null,
+Nombre Varchar (50),
+Apellido Varchar (50),
+Direccion Varchar (100),
+Telefono Varchar (50),
+CONSTRAINT PK_Clientes PRIMARY KEY  (ID_Cliente)
+);
 
---Create Table Empleados
---(
---  ID_Empleado int not null,
---  Nombre varchar(50),
---  Apellido varchar(50),
---  Cargo varchar(30),
---  Salario decimal(15,2)
+Create Table Empleados
+(
+  ID_Empleado int not null,
+  Nombre varchar(50),
+  Apellido varchar(50),
+  Cargo varchar(30),
+  Salario decimal(15,2)
 
---  Constraint PK_Empleado PRIMARY KEY (ID_Empleado)
---);
+  Constraint PK_Empleado PRIMARY KEY (ID_Empleado)
+);
 
 create TABLE Productos(
 ID_Productos int not null,
@@ -32,15 +32,15 @@ Stock int,
 CONSTRAINT PK_Productos PRIMARY KEY (ID_Productos)
 );
 
---Create Table Proveedores
---(
---  ID_Proveedor int not null,
---  Nombre varchar(50),
---  Dirección varchar(100),
---  Teléfono varchar(50),
+Create Table Proveedores
+(
+  ID_Proveedor int not null,
+  Nombre varchar(50),
+  Dirección varchar(100),
+  Teléfono varchar(50),
 
---  Constraint PK_Proveedor PRIMARY KEY (ID_Proveedor)
---);
+  Constraint PK_Proveedor PRIMARY KEY (ID_Proveedor)
+);
 
 create TABLE Ventas(
 ID_Venta INT not null,
@@ -81,4 +81,15 @@ Create Table Productos_Categoria
   Constraint FK_Productos_Categorias foreign key (ID_Producto) References Productos (ID_Productos),
   Constraint FK_Categorias_Productos foreign key (ID_Categorias) References Categoria_Productos (ID_Categoria)
 
-)
+);
+
+create TABLE Compras (
+ID_Compra INT not null,
+ID_Proveedor INT,
+ID_empleado INT,
+Fecha DATE,
+Total DECIMAL (15,2),
+  CONSTRAINT PK_Compra PRIMARY KEY (ID_Compra),
+  CONSTRAINT FK_Proveedor FOREIGN KEY (ID_Proveedor)REFERENCES Proveedores (ID_Proveedor),
+  CONSTRAINT FK_Empleado_ FOREIGN KEY (ID_Empleado) REFERENCES Empleados (ID_Empleado)
+);
