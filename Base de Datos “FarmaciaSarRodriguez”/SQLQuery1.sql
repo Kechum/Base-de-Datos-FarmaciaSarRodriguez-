@@ -26,8 +26,18 @@ Create Table Empleados
 create TABLE Productos(
 ID_Productos int not null,
 Nombre Varchar (50),
-Descripci�n Varchar (300),
+Descripcion Varchar (300),
 Precio decimal (10, 2),
 Stock int,
 CONSTRAINT PK_Productos PRIMARY KEY (ID_Productos)
-)
+);
+
+Create Table Proveedores
+(
+  ID_Proveedor int not null,
+  Nombre varchar(50),
+  Dirección varchar(100),
+  Teléfono varchar(50),
+
+  Constraint PK_Proveedor PRIMARY KEY (ID_Proveedor)
+);
