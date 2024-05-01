@@ -66,3 +66,9 @@ Create Table Detalles_Venta
 	CONSTRAINT FK_Ventas FOREIGN KEY (ID_Venta) REFERENCES Ventas (ID_Venta),
 	CONSTRAINT FK_Productos FOREIGN KEY (ID_Producto) REFERENCES Productos (ID_Productos)
 );
+
+create TABLE Categoria_Productos(
+ID_Categoria INT not null,
+Nombre VARCHAR (50),
+   CONSTRAINT PK_Categoria PRIMARY KEY (ID_Categoria)
+);
