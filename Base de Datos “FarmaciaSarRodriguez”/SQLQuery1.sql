@@ -93,3 +93,20 @@ Total DECIMAL (15,2),
   CONSTRAINT FK_Proveedor FOREIGN KEY (ID_Proveedor)REFERENCES Proveedores (ID_Proveedor),
   CONSTRAINT FK_Empleado_ FOREIGN KEY (ID_Empleado) REFERENCES Empleados (ID_Empleado)
 );
+
+Create Table Detalles_Compra
+(
+	ID_DetalleCompra int not null,
+	ID_Compra int,
+	ID_Producto int,
+	Cantidad int,
+	Precio_Unitario decimal (7,2),
+
+	CONSTRAINT PK_Detalle_Compra PRIMARY KEY (ID_DetalleCompra),
+    CONSTRAINT FK_Compra FOREIGN KEY (ID_Compra)REFERENCES Compras (ID_Compra),
+    CONSTRAINT FK_Productos_ FOREIGN KEY (ID_Producto) REFERENCES Productos (ID_Productos)
+)
+
+Alter Table Detalles_Compra
+ADD Subtotal decimal (15,2)
+
