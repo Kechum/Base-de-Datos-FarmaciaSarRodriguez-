@@ -1,0 +1,4 @@
+Create DataBase FarmaciaSarRodriguez
+
+use FarmaciaSarRodriguez
+Go
