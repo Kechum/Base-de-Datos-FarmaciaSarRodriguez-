@@ -110,3 +110,24 @@ Create Table Detalles_Compra
 Alter Table Detalles_Compra
 ADD Subtotal decimal (15,2)
 
+Alter Table Productos_Categoria
+alter column ID_Producto int not null
+Alter Table Productos_Categoria
+alter column ID_Categorias int not null;
+
+
+
+Alter Table Productos_Categoria
+ADD Primary Key ( ID_Producto, ID_Categorias)
+
+--Drop Table Productos_Categoria
+
+Create Table Productos_Categoria
+(
+  ID_Producto int,
+  ID_Categorias int,
+  Constraint PK_IdProductosyCategorias Primary Key (ID_Producto,ID_Categorias),
+  Constraint FK_Productos_Categorias foreign key (ID_Producto) References Productos (ID_Productos),
+  Constraint FK_Categorias_Productos foreign key (ID_Categorias) References Categoria_Productos (ID_Categoria)
+
+);
