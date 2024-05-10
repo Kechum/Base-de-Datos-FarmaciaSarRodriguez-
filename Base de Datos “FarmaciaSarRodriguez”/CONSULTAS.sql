@@ -26,7 +26,7 @@ order by COUNT (V.ID_venta) desc
 SELECT c.Nombre AS NombreCliente,
 COUNT(v.ID_Venta) AS NumeroVentas
 FROM Ventas v
-INNER JOIN Clientes c ON v.ID_Cliente = c.ID_Cliente
+RIGHT JOIN Clientes c ON v.ID_Cliente = c.ID_Cliente
 GROUP BY c.Nombre
 
 --8) Productos con el mayor y menor precio.
@@ -37,6 +37,12 @@ OR Precio = (SELECT MIN(Precio) FROM Productos);
 --9) Total de compras por proveedor.
 SELECT p.Nombre AS NombreProveedor,
 SUM(c.Total) AS TotalCompras
+FROM Compras c
+INNER JOIN Proveedores p ON c.ID_Proveedor = p.ID_Proveedor
+GROUP BY p.Nombre;
+
+SELECT p.Nombre AS NombreProveedor,
+COUNT(c.ID_Compra) AS CantidadCompras
 FROM Compras c
 INNER JOIN Proveedores p ON c.ID_Proveedor = p.ID_Proveedor
 GROUP BY p.Nombre;
