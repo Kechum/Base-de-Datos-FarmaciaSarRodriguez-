@@ -23,11 +23,12 @@ group by CONCAT (E.Nombre, ' ' , E.Apellido)
 order by COUNT (V.ID_venta) desc
 
 --7) Número de ventas por cliente.
-SELECT c.Nombre AS NombreCliente,
+SELECT CONCAT(c.Nombre, ' ', c.Apellido) AS NombreCliente,
 COUNT(v.ID_Venta) AS NumeroVentas
 FROM Ventas v
-RIGHT JOIN Clientes c ON v.ID_Cliente = c.ID_Cliente
-GROUP BY c.Nombre
+LEFT JOIN Clientes c ON v.ID_Cliente = c.ID_Cliente
+GROUP BY CONCAT(c.Nombre, ' ', c.Apellido), c.Nombre, c.Apellido;
+
 
 --8) Productos con el mayor y menor precio.
 SELECT Nombre, Precio FROM Productos
@@ -80,3 +81,31 @@ left join Detalles_Venta DV on P.ID_Productos = DV.Id_Producto
 group by p.Nombre
 having count(dv.Id_Producto) > 1
 
+--14) Cantidad de ventas realizadas por mes.
+SELECT MONTH(Fecha) AS Mes,
+       COUNT(ID_Venta) AS TotalVentas
+FROM Ventas
+GROUP BY MONTH(Fecha);
+--15) Nombre de cliente, empleado y total de venta ordenado por fecha de ventas
+SELECT v.Fecha AS FechaVenta,
+       CONCAT(c.Nombre, ' ', c.Apellido) AS NombreCliente,
+       CONCAT(e.Nombre, ' ', e.Apellido) AS NombreEmpleado,
+       v.Total AS TotalVenta
+FROM Ventas v
+JOIN Clientes c ON v.ID_Cliente = c.ID_Cliente
+JOIN Empleados e ON v.ID_Empleado = e.ID_Empleado
+ORDER BY v.Fecha;
+
+--16) Supongamos que queremos actualizar los salarios de todos los empleados en la tabla "Empleados" aumentando su salario en un 10% si están en un departamento específico, digamos 'Vendedor'.
+(Intentar posibilidad de usar Subconsulta IN para obtener Vendedores)
+UPDATE Empleados
+SET Salario = Salario * 1.10
+WHERE ID_Empleado IN (
+    SELECT ID_Empleado
+    FROM Empleados
+    WHERE Cargo = 'Vendedor'
+);
+
+SELECT e.Nombre AS NombreEmpleado, e.Salario
+FROM Empleados e
+WHERE e.Cargo = 'Vendedor';
