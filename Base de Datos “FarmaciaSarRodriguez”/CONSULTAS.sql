@@ -46,3 +46,37 @@ COUNT(c.ID_Compra) AS CantidadCompras
 FROM Compras c
 INNER JOIN Proveedores p ON c.ID_Proveedor = p.ID_Proveedor
 GROUP BY p.Nombre;
+
+--10) Cantidad de productos por categoría.
+select CP.Nombre as Categoria, count(P.ID_Productos) as 'Cantidad de Productos'from Productos P
+right join Productos_Categoria PC on PC.ID_Producto = P.ID_Productos
+right join Categoria_Productos CP on CP.ID_Categoria = PC.ID_Categorias
+group by CP.Nombre
+order by count(P.ID_Productos) desc;
+
+--11) Nombre del cliente que ha gastado más en una sola compra.
+select Top 1 CONCAT (C.Nombre, ' ' , C.Apellido) As 'Cliente Que Mas gastos en una sola compra realizo'
+from Ventas V
+right join clientes C on V.ID_Cliente = C.ID_Cliente
+group by CONCAT (C.Nombre, ' ' , C.Apellido)
+order by Sum(V.Total) desc;
+
+--12) Cantidad de productos comprados por cliente en una fecha específica.
+Select CONCAT (C.Nombre, ' ' , C.Apellido) As Cliente,
+		count(dv.Id_Producto) as 'Productos Comprados',
+		sum(dv.Cantidad) as 'Total de Productos comprados' 
+from Ventas V
+right Join clientes C on V.ID_Cliente = C.ID_Cliente
+right Join Detalles_Venta DV on V.ID_Venta = Dv.ID_Venta
+where V.Fecha = '2024-04-25'
+group by CONCAT (C.Nombre, ' ' , C.Apellido) 
+
+--13) Productos que han sido comprados más de una vez.
+select P.Nombre,
+		count (dv.Id_Producto) as 'Nº de Veces',
+		sum(dv.Cantidad) as 'Total de comprado' 
+from Productos P
+left join Detalles_Venta DV on P.ID_Productos = DV.Id_Producto
+group by p.Nombre
+having count(dv.Id_Producto) > 1
+
