@@ -114,3 +114,12 @@ WHERE e.Cargo = 'Vendedor';
 --Se deben borrar aquellas ventas ocurridas antes del 1ro de Mayo.
 Delete from Ventas where Fecha < '2024-05-01'
 
+--18) Incrementar el stock de un producto X.
+SELECT ID_Productos, Nombre, Stock
+FROM Productos;
+
+
+UPDATE Productos
+SET Stock = Stock + 10 
+WHERE ID_Productos = 1; 
+
