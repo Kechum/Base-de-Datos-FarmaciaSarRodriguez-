@@ -109,3 +109,8 @@ WHERE ID_Empleado IN (
 SELECT e.Nombre AS NombreEmpleado, e.Salario
 FROM Empleados e
 WHERE e.Cargo = 'Vendedor';
+
+--17) Eliminar ventas antiguas y sus detalles asociados (Es decir, eliminar registros de 2 tablas en simultáneo)..
+--Se deben borrar aquellas ventas ocurridas antes del 1ro de Mayo.
+Delete from Ventas where Fecha < '2024-05-01'
+
