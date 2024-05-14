@@ -153,5 +153,27 @@ values (21,21, (select ID_Productos from Productos where Nombre like 'Paracetamo
 (select Precio from Productos P where Nombre like 'Paracetamol'), 
 10 * (select Precio From Productos where Nombre like 'Paracetamol'));
 
+--Ibuprofeno
+insert into Detalles_Venta (ID_Detalle,ID_Venta,Id_Producto,Cantidad,Precio_Unitario,Subtotal)
+values (22,21, (select ID_Productos from Productos where Nombre like 'Ibuprofeno'),10,
+(select Precio from Productos P where Nombre like 'Ibuprofeno'), 
+10 * (select Precio From Productos where Nombre like 'Ibuprofeno'));
+
 select * from Ventas
 select * from Detalles_Venta
+
+-- c) Actualizar el Stock de los Productos anteriormente vendidos.
+  -- IMPORTANTE: Realizar un solo UPDATE para los 2 Productos.
+
+  UPDATE Productos
+  SET Stock = Stock - 10
+  WHERE ID_Productos IN (
+     SELECT ID_Productos
+     FROM Productos
+	 WHERE Nombre IN ('Paracetamol', 'Ibuprofeno')
+);
+
+SELECT Nombre, Stock FROM Productos
+WHERE Nombre IN ('Paracetamol', 'Ibuprofeno');
+
+

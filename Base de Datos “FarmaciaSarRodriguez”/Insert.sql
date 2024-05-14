@@ -69,7 +69,12 @@
 --(17, 'Lorazepam', 'Ansiolítico', 10.50, 40),
 --(18, 'Paroxetina', 'Antidepresivo', 12.50, 55),
 --(19, 'Simvastatina', 'Hipolipemiante', 15.50, 60),
---(20, 'Ciprofloxacino', 'Antibiótico', 13.50, 70);--INSERT INTO Proveedores (ID_Proveedor, Nombre, Dirección, Teléfono)--VALUES--(1, 'PharmaCorp', 'Avenida de la Salud 123', '2281 000-0001'),
+--(20, 'Ciprofloxacino', 'Antibiótico', 13.50, 70);
+
+
+--INSERT INTO Proveedores (ID_Proveedor, Nombre, Dirección, Teléfono)
+--VALUES
+--(1, 'PharmaCorp', 'Avenida de la Salud 123', '2281 000-0001'),
 --(2, 'MedFarma', 'Boulevard del Bienestar 456', '2281 000-0002'),
 --(3, 'SaluVida', 'Calle de la Esperanza 789', '2281 000-0003'),
 --(4, 'FarmaGen', 'Paseo de los Remedios 147', '2281 000-0004'),
