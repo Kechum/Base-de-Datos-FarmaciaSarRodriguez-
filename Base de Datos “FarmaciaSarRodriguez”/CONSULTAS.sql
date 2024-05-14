@@ -123,3 +123,35 @@ UPDATE Productos
 SET Stock = Stock + 10 
 WHERE ID_Productos = 1; 
 
+--19) UPDATE para actualizar la categoría de un producto X.
+insert into Categoria_Productos (ID_Categoria, Nombre) Values (21, 'Antipiretico')
+
+Update Productos_Categoria
+set ID_Categorias = (
+		select ID_Categoria
+		from Categoria_Productos
+		where Nombre like 'antipire%'
+)
+where ID_Producto = 1
+
+
+
+--20) Realizar esta serie de Consultas relacionadas:
+   --   a) Insertar una venta para el Cliente 3, realizada por el Empleado 2, 
+	  --en la fecha actual (usar función específica) y por un total de 125.00
+
+insert into Ventas (ID_Venta,ID_Cliente,ID_Empleado,Fecha,Total)
+values (21,3,2, GETDATE(),125.00)
+
+ --b) Supongamos que la venta fue de 10u. de Paracetamol y 10u. de Ibuprofeno.
+ --         IMPORTANTE: para obtener el ID_Venta, Precio_Unitario y Subtotal, 
+	--	  intentar realizar las consultas dentro del mismo INSERT..
+
+--Paracetamol
+insert into Detalles_Venta (ID_Detalle,ID_Venta,Id_Producto,Cantidad,Precio_Unitario,Subtotal)
+values (21,21, (select ID_Productos from Productos where Nombre like 'Paracetamol'),10,
+(select Precio from Productos P where Nombre like 'Paracetamol'), 
+10 * (select Precio From Productos where Nombre like 'Paracetamol'));
+
+select * from Ventas
+select * from Detalles_Venta
