@@ -149,5 +149,65 @@ BEGIN
 END;
 
 
+--PROCEDIMIENTO ALMACENADO INSERTAR CONTROL 
+CREATE PROCEDURE sp_InsertarControl (
+    @idNiño_a INT,
+    @fecha_control DATE,
+    @evaluacionAntropometricoId INT = NULL,
+    @idPresionArterial INT = NULL,
+    @agudezaVisualId INT = NULL,
+    @idMedicoResponsable INT = NULL
+)
+AS
+BEGIN
+
+    BEGIN TRANSACTION;
+    
+    BEGIN TRY
+     
+        INSERT INTO controles (idNiño_a, fechaControl, evaluacionAntropometricoId, idPresionArterial, agudezaVisualId, idMedicoResponsable)
+        VALUES (@idNiño_a, @fecha_control, @evaluacionAntropometricoId, @idPresionArterial, @agudezaVisualId, @idMedicoResponsable);
+        
+       
+        COMMIT TRANSACTION;
+        PRINT 'Transacción realizada exitosamente.';
+    END TRY
+    BEGIN CATCH
+       
+        ROLLBACK TRANSACTION;
+        PRINT 'Error ocurrido. Transacción revertida.';
+        
+    END CATCH;
+END;
+
+
+
+--PROCEDIMIENTO ALMACENADO INSERTAR VACANUCION 
+CREATE PROCEDURE sp_InsertarVacunacion (
+     @idNiño_a INT,
+    @estado CHAR(9),
+    @aplicacion BIT,
+    @indicacion BIT
+)
+AS
+BEGIN
+    
+    BEGIN TRANSACTION;
+    
+    BEGIN TRY
+      
+        INSERT INTO vacunacion (idNiño_a, estado, aplicacion, indicacion)
+        VALUES (@idNiño_a, @estado, @aplicacion, @indicacion);
+        
+        
+        COMMIT TRANSACTION;
+        PRINT 'Transacción realizada exitosamente.';
+    END TRY
+    BEGIN CATCH
+        
+        ROLLBACK TRANSACTION;
+        PRINT 'Error ocurrido. Transacción revertida.';
+    END CATCH;
+END;
 
 
