@@ -69,3 +69,39 @@ BEGIN
     DELETE FROM detalle_visual
     WHERE idVisual IN (SELECT visualId FROM hallazgos_clinicos WHERE idHallazgosClinicos IN (SELECT idHallazgosClinicos FROM deleted));
 END;
+
+--TRIGGER ESTADO
+
+CREATE TRIGGER trg_Asegurar_estado
+ON vacunacion
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    UPDATE v
+    SET estado = CASE
+                    WHEN i.aplicacion = 1 THEN 'incompleto'
+                    WHEN i.aplicacion = 0 THEN 'completo'
+                    ELSE v.estado -- Mantener el estado actual si no hay cambios en 'aplicacion'
+                END
+    FROM vacunacion v
+    JOIN inserted i ON v.idVacunacion = i.idVacunacion;
+END;
+
+
+--TRIGGER ELIMINAR REGISTROS 
+
+CREATE TRIGGER trg_eliminar_registros_relacionados_niño
+ON NIÑOS
+AFTER DELETE
+AS
+BEGIN
+    DELETE FROM controles
+    WHERE idNiño_a IN (SELECT idNiño_a FROM deleted);
+
+    DELETE FROM hallazgos_clinicos
+    WHERE idNiño_a IN (SELECT idNiño_a FROM deleted);
+
+    DELETE FROM vacunacion
+    WHERE idNiño_a IN (SELECT idNiño_a FROM deleted);
+END;
+
