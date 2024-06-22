@@ -41,6 +41,10 @@ CREATE TABLE vacunacion (
     CONSTRAINT FK_idNiño_a FOREIGN KEY (idNiño_a) REFERENCES NIÑOS (idNiño_a)
 );
 
+--MODIFICACION VALOR ESTADO (TABLA VACUNACION)
+ALTER TABLE vacunacion
+ALTER COLUMN estado VARCHAR(15);
+
 CREATE TABLE detalle_evaluacionAntropometrico (
     idEvaluacionAntropometrico INT IDENTITY,
     Peso DECIMAL(5,2),
