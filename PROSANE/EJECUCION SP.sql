@@ -24,7 +24,7 @@ EXEC sp_InsertarVacunacion
 
 --INSERT SP INSERTAR HALLAZGO SI HUBO 
 EXEC sp_InsertarHallazgoSiHubo
-    @idNiño_a = 1,
+    @idNiño_a = 2,
     @fecha_hallazgo = '2024-06-22',
     @conHallazgosPiel = 1,
     @descripcionPiel = 'Erupción cutánea en el brazo derecho.',
@@ -41,9 +41,10 @@ EXEC sp_InsertarHallazgoSiHubo
     @conHallazgosVisual = 1,
     @descripcionVisual = 'Dificultad para ver de cerca.'
 
+
 --INSERT SP INSERTAR CONTROL 
 EXEC sp_InsertarControl 
-    @idNiño_a = 1, -- ID del niño
+    @idNiño_a = 3, -- ID del niño
     @fecha_control = '2024-06-20', -- Fecha del control
     @evaluacionAntropometricoId = 4, -- ID de evaluación antropométrica
     @idPresionArterial = 2, -- ID de presión arterial
@@ -59,28 +60,23 @@ EXEC sp_CantidadNiñosPorEdadPorEscuela
 EXEC sp_ListaNiñosVacunacionCompletaPorEscuela
 
 --CONSULTA SP DETALLES CONTROL MEDICO POR ESCUELA
-DECLARE @idEscuela INT = 1; -- ID DE ESCUELA A CONSULTAR
+DECLARE @idEscuela INT = 2; -- ID DE ESCUELA A CONSULTAR
 EXEC sp_DetallesControlMedicoNiñoPorEscuela @idEscuela;
 
 --CONSULTA SP HALLAZGO CLINICO POR ESCUELA
-DECLARE @idEscuela INT = 3; -- ID DE ESCUELA A CONSULTAR 
+DECLARE @idEscuela INT = 2; -- ID DE ESCUELA A CONSULTAR 
 EXEC sp_HallazgosClinicosNiñoPorEscuela @idEscuela;
 
 --SP ELIMINAR CONTROL POR FECHA 
-DECLARE @idHallazgo INT = 62; -- ID del hallazgo clínico que deseas eliminar
+DECLARE @idHallazgo INT = 61; -- ID del hallazgo clínico que deseas eliminar
 EXEC sp_EliminarHallazgo @idHallazgo;
 
+SELECT * FROM hallazgos_clinicos
 
---SP ELIMINAR CONTROL POR FECHA 
-DECLARE @fecha DATE = '2024-01-15';  -- Reemplaza con la fecha deseada
-
-EXEC sp_EliminarControlPorFecha @fecha;
-
-SELECT * FROM controles
 
 --SP ACTUALIZAR COBERTURA
 DECLARE @idNiño_a INT = 1;  -- Reemplaza con el ID del niño
-DECLARE @nuevaCoberturaId INT = 3;  -- Reemplaza con el nuevo ID de cobertura
+DECLARE @nuevaCoberturaId INT = 6;  -- Reemplaza con el nuevo ID de cobertura
 
 EXEC sp_ActualizarCobertura @idNiño_a, @nuevaCoberturaId;
 
@@ -88,7 +84,7 @@ SELECT * FROM NIÑOS
 
 --SP ACTUALIZAR ESCUELA NIÑOS
 DECLARE @idNiño_a INT = 1;  -- Reemplaza con el ID del niño
-DECLARE @nuevoIdEscuela INT = 2;  -- Reemplaza con el nuevo ID de la escuela
+DECLARE @nuevoIdEscuela INT = 1;  -- Reemplaza con el nuevo ID de la escuela
 
 EXEC sp_ActualizarEscuelaNiño @idNiño_a, @nuevoIdEscuela;
 

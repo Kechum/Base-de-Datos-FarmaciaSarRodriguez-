@@ -149,6 +149,92 @@ BEGIN
 END;
 
 
+CREATE PROCEDURE sp_InsertarHallazgoSiHubo
+    @idNiño_a INT,
+    @fecha_hallazgo DATE,
+    @conHallazgosPiel BIT,
+    @descripcionPiel VARCHAR(250),
+    @conHallazgosPartesBlandas BIT,
+    @descripcionPartesBlandas VARCHAR(250),
+    @conHallazgosRespiratorio BIT,
+    @descripcionRespiratorio VARCHAR(250),
+    @conHallazgosAbdominal BIT,
+    @descripcionAbdominal VARCHAR(250),
+    @conHallazgosOsteoarticular BIT,
+    @descripcionOsteoarticular VARCHAR(250),
+    @conHallazgosNeurologico BIT,
+    @descripcionNeurologico VARCHAR(250),
+    @conHallazgosVisual BIT,
+    @descripcionVisual VARCHAR(250)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        -- Inserción en detalle_piel
+        IF @conHallazgosPiel = 1 AND @descripcionPiel IS NOT NULL
+        BEGIN
+            INSERT INTO detalle_piel (conHallazgos, descripcion)
+            VALUES (1, @descripcionPiel);
+        END
+
+        -- Inserción en detalle_partesBlandas
+        IF @conHallazgosPartesBlandas = 1 AND @descripcionPartesBlandas IS NOT NULL
+        BEGIN
+            INSERT INTO detalle_partesBlandas (conHallazgos, descripcion)
+            VALUES (1, @descripcionPartesBlandas);
+        END
+
+        -- Inserción en detalle_respiratorio
+        IF @conHallazgosRespiratorio = 1 AND @descripcionRespiratorio IS NOT NULL
+        BEGIN
+            INSERT INTO detalle_respiratorio (conHallazgos, descripcion)
+            VALUES (1, @descripcionRespiratorio);
+        END
+
+        -- Inserción en detalle_abdominal
+        IF @conHallazgosAbdominal = 1 AND @descripcionAbdominal IS NOT NULL
+        BEGIN
+            INSERT INTO detalle_abdominal (conHallazgos, descripcion)
+            VALUES (1, @descripcionAbdominal);
+        END
+
+        -- Inserción en detalle_osteoarticular
+        IF @conHallazgosOsteoarticular = 1 AND @descripcionOsteoarticular IS NOT NULL
+        BEGIN
+            INSERT INTO detalle_osteoarticular (conHallazgos, descripcion)
+            VALUES (1, @descripcionOsteoarticular);
+        END
+
+        -- Inserción en detalle_neurologico
+        IF @conHallazgosNeurologico = 1 AND @descripcionNeurologico IS NOT NULL
+        BEGIN
+            INSERT INTO detalle_neurologico (conHallazgos, descripcion)
+            VALUES (1, @descripcionNeurologico);
+        END
+
+        -- Inserción en detalle_visual
+        IF @conHallazgosVisual = 1 AND @descripcionVisual IS NOT NULL
+        BEGIN
+            INSERT INTO detalle_visual (conHallazgos, descripcion)
+            VALUES (1, @descripcionVisual);
+        END
+
+        -- Confirmar la transacción
+        COMMIT TRANSACTION;
+        PRINT 'Transacción realizada exitosamente.';
+    END TRY
+    BEGIN CATCH
+        -- Si ocurre un error, deshacer la transacción
+        ROLLBACK TRANSACTION;
+        PRINT 'Error ocurrido. Transacción revertida.';
+        
+        -- Lanzar el error para que sea manejado externamente
+        THROW;
+    END CATCH;
+END;
+
 --PROCEDIMIENTO ALMACENADO INSERTAR CONTROL 
 
 CREATE PROCEDURE sp_InsertarControl (

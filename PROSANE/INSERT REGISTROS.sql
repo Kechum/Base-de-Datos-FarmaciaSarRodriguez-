@@ -45,6 +45,7 @@ VALUES
 ('Verónica', 'López', 'Calle Luna 999', '678901234', '67890123', 'F', '2012-11-11', 4, (SELECT idEscuela FROM escuelas WHERE nombre = 'Escuela 2')),
 ('Carolina', 'Saenz', 'Calle mitre 359', '789012345', '78901234', 'F', '2014-1-19', 1, (SELECT idEscuela FROM escuelas WHERE nombre = 'Escuela 28'));
 
+select * from NIÑOS
 
 
 --INSERT TABLA VACUNACION
